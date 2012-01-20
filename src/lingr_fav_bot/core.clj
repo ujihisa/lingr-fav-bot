@@ -7,8 +7,8 @@
 (def favs (atom []))
 (def lastmsg "dummy")
 
-(defn format-fav [fav]
-  (str "* [" (:nickname fav) "] " (:text fav) " (at " (:timestamp fav) ")"))
+(defn format-fav [fav by]
+  (str "* [" (:nickname fav) "] " (:text fav) " (at " (:timestamp fav) " by " by ")"))
 
 (defroutes hello
   (GET "/" [] "fav is working")
@@ -18,7 +18,7 @@
           (cond
             (= (:text message) "f:all") (apply str (interpose "\n" (map format-fav @favs)))
             (= (:text message) "f:av") (do
-                                         (swap! favs #(cons lastmsg %))
+                                         (swap! favs #(cons [lastmsg (:nickname message)] %))
                                          "")
             :else (def lastmsg message)))))
 
