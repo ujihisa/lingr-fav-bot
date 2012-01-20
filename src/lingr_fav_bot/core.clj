@@ -1,4 +1,4 @@
-(ns lingr-clojure-bot.core
+(ns lingr-fav-bot.core
   (:use
     [clojure.data.json :only (read-json)]
     [compojure.core]
