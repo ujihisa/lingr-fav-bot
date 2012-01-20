@@ -4,12 +4,18 @@
     [compojure.core]
     [ring.adapter.jetty]))
 
+(def favs (atom []))
+
 (defroutes hello
   (GET "/" [] "working")
   (POST "/"
         {body :body}
         (let [message (:message (first (:events (read-json (slurp body)))))]
-          (str message))))
+          (if (= (:text message) "f:all")
+            (apply str (interpose "\n" (@favs)))
+            (do
+              (swap! favs #(cons (str message) %))
+              "")))))
 
 (defn -main []
   (run-jetty hello {:port 4002}))
