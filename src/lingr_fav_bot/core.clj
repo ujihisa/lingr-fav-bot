@@ -12,13 +12,12 @@
   (POST "/"
         {body :body}
         (let [message (:message (first (:events (read-json (slurp body)))))]
-          (if (= (:text message) "f:all")
-            (apply str (interpose "\n" @favs))
-            (if (= (:text message) "f:av")
-              (do
-                (swap! favs #(cons (str lastmsg) %))
-                "")
-              (def lastmsg message))))))
+          (cond
+            (= (:text message) "f:all") (apply str (interpose "\n" @favs))
+            (= (:text message) "f:av") (do
+                                         (swap! favs #(cons (str lastmsg) %))
+                                         "")
+            :else (def lastmsg message)))))
 
 (defn -main []
   (run-jetty hello {:port 4002}))
