@@ -12,4 +12,4 @@
           (str message))))
 
 (defn -main []
-  (run-jetty hello {:port 8080}))
+  (run-jetty hello {:port 4002}))
