@@ -16,7 +16,7 @@
             (apply str (interpose "\n" @favs))
             (if (= (:text message) "f:av")
               (do
-                (swap! favs #(cons (str message) %))
+                (swap! favs #(cons (str lastmsg) %))
                 "")
               (def lastmsg message))))))
 
