@@ -8,7 +8,7 @@
 (def lastmsg "dummy")
 
 (defn format-fav [fav]
-  (str "* [" (:nickname fav) "] " (:text fav)))
+  (str "* [" (:nickname fav) "] " (:text fav) " (on " (:timestamp fav) ")"))
 
 (defroutes hello
   (GET "/" [] "fav is working")
