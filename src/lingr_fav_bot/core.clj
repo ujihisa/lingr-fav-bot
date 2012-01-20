@@ -7,8 +7,10 @@
 (def favs (atom []))
 (def lastmsg "dummy")
 
-(defn format-fav [fav by]
-  (str "* [" (:nickname fav) "] " (:text fav) " (at " (:timestamp fav) " by " by ")"))
+(defn format-fav [fav]
+  (let [msg (first fav)
+        by (second fav)]
+    (str "* [" (:nickname msg) "] " (:text msg) " (at " (:timestamp msg) " by " by ")")))
 
 (defroutes hello
   (GET "/" [] "fav is working")
