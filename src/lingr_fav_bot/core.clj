@@ -18,7 +18,7 @@
           (cond
             (= (:text message) "f:all") (apply str (interpose "\n" (map format-fav @favs)))
             (= (:text message) "f:av") (do
-                                         (swap! favs #(cons (str lastmsg) %))
+                                         (swap! favs #(cons lastmsg %))
                                          "")
             :else (def lastmsg message)))))
 
