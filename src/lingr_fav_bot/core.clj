@@ -12,7 +12,7 @@
         {body :body}
         (let [message (:message (first (:events (read-json (slurp body)))))]
           (if (= (:text message) "f:all")
-            (apply str (interpose "\n" (@favs)))
+            (apply str (interpose "\n" @favs))
             (do
               (swap! favs #(cons (str message) %))
               "")))))
